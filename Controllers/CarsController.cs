@@ -23,7 +23,7 @@ namespace CarsSystem_TSP_Project.Controllers
         // GET: Cars
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment);
+            var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,6 +38,7 @@ namespace CarsSystem_TSP_Project.Controllers
             var car = await _context.Cars
                 .Include(c => c.Owner)
                 .Include(c => c.Payment)
+                .Include(c => c.Services)
                 .FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {
@@ -52,6 +53,7 @@ namespace CarsSystem_TSP_Project.Controllers
         {
             ViewData["OwnerId"] = new SelectList(_context.Owners, "OwnerId", "Name");
             ViewData["PaymentId"] = new SelectList(_context.Payments, "PaymentId", "Type");
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "Name");
             return View();
         }
 
@@ -60,7 +62,7 @@ namespace CarsSystem_TSP_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarId,Manufacturer,Model,Engine,Transmission,DriveType,Vin,Price,DateOfFirstReg,Mileage,OwnerId,PaymentId,Discount,VehicleType")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,Manufacturer,Model,Engine,Transmission,DriveType,Vin,Price,DateOfFirstReg,Mileage,OwnerId,PaymentId,Discount,VehicleType,ServiceId")] Car car)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +72,7 @@ namespace CarsSystem_TSP_Project.Controllers
             }
             ViewData["OwnerId"] = new SelectList(_context.Owners, "OwnerId", "Name", car.OwnerId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "PaymentId", "Type", car.PaymentId);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "Name", car.ServiceId);
             return View(car);
         }
 
@@ -88,6 +91,7 @@ namespace CarsSystem_TSP_Project.Controllers
             }
             ViewData["OwnerId"] = new SelectList(_context.Owners, "OwnerId", "Name", car.OwnerId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "PaymentId", "Type", car.PaymentId);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "Name", car.ServiceId);
             return View(car);
         }
 
@@ -96,7 +100,7 @@ namespace CarsSystem_TSP_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,Manufacturer,Model,Engine,Transmission,DriveType,Vin,Price,DateOfFirstReg,Mileage,OwnerId,PaymentId,Discount,VehicleType")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,Manufacturer,Model,Engine,Transmission,DriveType,Vin,Price,DateOfFirstReg,Mileage,OwnerId,PaymentId,Discount,VehicleType,ServiceId")] Car car)
         {
             if (id != car.CarId)
             {
@@ -125,6 +129,7 @@ namespace CarsSystem_TSP_Project.Controllers
             }
             ViewData["OwnerId"] = new SelectList(_context.Owners, "OwnerId", "Name", car.OwnerId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "PaymentId", "Type", car.PaymentId);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "Name", car.ServiceId);
             return View(car);
         }
 
@@ -139,6 +144,7 @@ namespace CarsSystem_TSP_Project.Controllers
             var car = await _context.Cars
                 .Include(c => c.Owner)
                 .Include(c => c.Payment)
+                .Include(c => c.Services)
                 .FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {

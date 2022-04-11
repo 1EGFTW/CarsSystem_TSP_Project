@@ -33,6 +33,7 @@ namespace CarSystem_TSP_Project.Models
         public double Discount { get; set; }
         [Required]
         public string VehicleType { get; set; }
+        public int ServiceId { get; set; }
         public Service Services { get; set; }
 
     }
