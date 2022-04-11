@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CarSystem_TSP_Project.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarsSystem_TSP_Project.Data
@@ -9,5 +10,10 @@ namespace CarsSystem_TSP_Project.Data
             : base(options)
         {
         }
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Mechanic> Mechanics { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Owner> Owners { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
     }
 }
