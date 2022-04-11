@@ -56,14 +56,14 @@ namespace CarsSystem_TSP_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ServiceId,Name,Type,Price")] Service service)
-        {
+        {/*
             if (ModelState.IsValid)
-            {
+            {*/
                 _context.Add(service);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(service);
+           /* }
+            return View(service);*/
         }
 
         // GET: Services/Edit/5

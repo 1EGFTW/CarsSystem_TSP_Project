@@ -64,16 +64,16 @@ namespace CarsSystem_TSP_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CarId,Manufacturer,Model,Engine,Transmission,DriveType,Vin,Price,DateOfFirstReg,Mileage,OwnerId,PaymentId,Discount,VehicleType,ServiceId")] Car car)
         {
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
                 _context.Add(car);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["OwnerId"] = new SelectList(_context.Owners, "OwnerId", "Name", car.OwnerId);
+           // }
+           /* ViewData["OwnerId"] = new SelectList(_context.Owners, "OwnerId", "Name", car.OwnerId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "PaymentId", "Type", car.PaymentId);
-            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "Name", car.ServiceId);
-            return View(car);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "Name", car.ServiceId);*/
+           // return View(car);
         }
 
         // GET: Cars/Edit/5

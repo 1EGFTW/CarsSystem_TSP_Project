@@ -56,14 +56,14 @@ namespace CarsSystem_TSP_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MechanicId,Name")] Mechanic mechanic)
-        {
+        {/*
             if (ModelState.IsValid)
-            {
+            {*/
                 _context.Add(mechanic);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(mechanic);
+/*            }
+            return View(mechanic);*/
         }
 
         // GET: Mechanics/Edit/5

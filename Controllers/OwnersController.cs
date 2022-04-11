@@ -57,13 +57,13 @@ namespace CarsSystem_TSP_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OwnerId,Name,CarsBought")] Owner owner)
         {
-            if (ModelState.IsValid)
-            {
+          /*  if (ModelState.IsValid)
+            {*/
                 _context.Add(owner);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(owner);
+           /* }
+            return View(owner);*/
         }
 
         // GET: Owners/Edit/5
