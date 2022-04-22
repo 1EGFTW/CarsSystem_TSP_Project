@@ -11,12 +11,15 @@ namespace CarSystem_TSP_Project.Models
         }
         [Key]
         public int ServiceId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
+        [MinLength(3, ErrorMessage = "Minimum length is 3 characters!")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
+        [MinLength(3, ErrorMessage = "Minimum length is 3 characters!")]
         public string Type { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
         public double Price { get; set; }
+        [Required(ErrorMessage = "This field is required!")]
         private Mechanic Mechanics { get; set; }
         public virtual ICollection<Car> Cars { get; set; }
 
