@@ -57,13 +57,13 @@ namespace CarsSystem_TSP_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PaymentId,Type")] Payment payment)
         {
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
                 _context.Add(payment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(payment);
+       /*     }
+            return View(payment);*/
         }
 
         // GET: Payments/Edit/5

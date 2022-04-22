@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarSystem_TSP_Project.Models
 {
@@ -6,10 +7,15 @@ namespace CarSystem_TSP_Project.Models
     {
         [Key]
         public int OwnerId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
+        [MinLength(2, ErrorMessage = "Minimum length is 2 characters!")]
         public string Name { get; set; }
+
+        [DisplayName("Cars Bought")]
+        [Required(ErrorMessage = "This field is required!")]
+
         public int CarsBought { get; set; } = 0;
 
-        public ICollection<Car> Car { get; set; }
+        public virtual ICollection<Car> Car { get; set; }
     }
 }

@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Cars in the system</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    
 </p>
 <table class="table">
     <thead>
@@ -27,12 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.DriveType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.DateOfFirstReg)
             </th>
@@ -42,19 +37,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Owner)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Payment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discount)
-            </th>
+         
             <th>
                 @Html.DisplayNameFor(model => model.VehicleType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Services)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th></th>
+          
+            <th>
+                <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
+                    <i class="fa-solid fa-plus"></i>New</a>
+                </th>
         </tr>
     </thead>
     <tbody>
@@ -76,36 +70,35 @@
                 @Html.DisplayFor(modelItem => item.DriveType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Vin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.DateOfFirstReg)
             </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Mileage)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Owner.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Payment.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount)
-            </td>
+            
+            
             <td>
                 @Html.DisplayFor(modelItem => item.VehicleType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Services.Name)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
+           
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CarId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
+                <div class="btn-group btn-group-sm">
+
+                <a asp-action="AddOrEdit" asp-route-id="@item.CarId" class="btn btn-warning">
+                    <i class="fa-solid fa-pen-to-square">Edit</i>
+                    </a> |
+             
+                <a asp-action="Delete" asp-route-id="@item.CarId" class="btn btn-danger">
+                    <i class="far fa-trash-alt"></i>
+                    Delete</a>
+                </div>
             </td>
         </tr>
 }

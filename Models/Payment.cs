@@ -8,8 +8,9 @@ namespace CarSystem_TSP_Project.Models
 
         [Key]
         public int PaymentId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
+        [MinLength(3, ErrorMessage = "Minimum length is 3 characters!")]
         public string Type { get; set; }
-        public ICollection<Car> Car { get; set; }
+        public virtual ICollection<Car> Car { get; set; }
     }
 }

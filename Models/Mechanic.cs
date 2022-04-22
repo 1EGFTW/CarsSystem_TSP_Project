@@ -10,7 +10,8 @@ namespace CarSystem_TSP_Project.Models
         }
         [Key]
         public int MechanicId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
+        [MinLength(2, ErrorMessage = "Minimum length is 2 characters!")]
         public string Name { get; set; }
 
 
