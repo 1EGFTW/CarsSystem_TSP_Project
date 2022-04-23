@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarSystem_TSP_Project.Models;
 using CarsSystem_TSP_Project.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarsSystem_TSP_Project.Controllers
 {
@@ -26,47 +27,61 @@ namespace CarsSystem_TSP_Project.Controllers
             return View(await _context.Mechanics.ToListAsync());
         }
 
-        // GET: Mechanics/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /* // GET: Mechanics/Details/5
+         public async Task<IActionResult> Details(int? id)
+         {
+             if (id == null)
+             {
+                 return NotFound();
+             }
+
+             var mechanic = await _context.Mechanics
+                 .FirstOrDefaultAsync(m => m.MechanicId == id);
+             if (mechanic == null)
+             {
+                 return NotFound();
+             }
+
+             return View(mechanic);
+         }*/
+
+        // GET: Mechanics/AddOrEdit
+        [Authorize]
+        public IActionResult AddOrEdit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
-                return NotFound();
+                return View(new Mechanic());
             }
-
-            var mechanic = await _context.Mechanics
-                .FirstOrDefaultAsync(m => m.MechanicId == id);
-            if (mechanic == null)
-            {
-                return NotFound();
-            }
-
-            return View(mechanic);
+            else return View(_context.Mechanics.Find(id));
         }
 
-        // GET: Mechanics/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Mechanics/Create
+        // POST: Mechanics/AddOrEdit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MechanicId,Name")] Mechanic mechanic)
+        [Authorize]
+        public async Task<IActionResult> AddOrEdit([Bind("MechanicId,Name")] Mechanic mechanic)
         {/*
             if (ModelState.IsValid)
             {*/
+                if(mechanic.MechanicId== 0)
+                {
                 _context.Add(mechanic);
+                }
+                else
+                {
+                    _context.Update(mechanic);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
 /*            }
             return View(mechanic);*/
         }
 
-        // GET: Mechanics/Edit/5
+       /* // GET: Mechanics/Edit
+      
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,8 +131,9 @@ namespace CarsSystem_TSP_Project.Controllers
             }
             return View(mechanic);
         }
-
+*/
         // GET: Mechanics/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,6 +154,7 @@ namespace CarsSystem_TSP_Project.Controllers
         // POST: Mechanics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var mechanic = await _context.Mechanics.FindAsync(id);

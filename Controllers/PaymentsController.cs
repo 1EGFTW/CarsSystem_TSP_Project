@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarSystem_TSP_Project.Models;
 using CarsSystem_TSP_Project.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarsSystem_TSP_Project.Controllers
 {
@@ -27,7 +28,7 @@ namespace CarsSystem_TSP_Project.Controllers
         }
 
         // GET: Payments/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /*public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -42,82 +43,92 @@ namespace CarsSystem_TSP_Project.Controllers
             }
 
             return View(payment);
-        }
+        }*/
 
-        // GET: Payments/Create
-        public IActionResult Create()
+        // GET: Payments/AddOrEdit
+        [Authorize]
+        public IActionResult AddOrEdit(int id)
         {
-            return View();
+            if(id==0)
+                 return View(new Payment());
+            else
+                return View(_context.Payments.Find(id));
         }
 
-        // POST: Payments/Create
+        // POST: Payments/AddOrEdit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentId,Type")] Payment payment)
+        [Authorize]
+        public async Task<IActionResult> AddOrEdit([Bind("PaymentId,Type")] Payment payment)
         {
             /*if (ModelState.IsValid)
             {*/
+            if (payment.PaymentId == 0)
                 _context.Add(payment);
+            else
+                _context.Update(payment);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
        /*     }
             return View(payment);*/
         }
 
-        // GET: Payments/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        /* // GET: Payments/Edit/5
+         public async Task<IActionResult> Edit(int? id)
+         {
+             if (id == null)
+             {
+                 return NotFound();
+             }
 
-            var payment = await _context.Payments.FindAsync(id);
-            if (payment == null)
-            {
-                return NotFound();
-            }
-            return View(payment);
-        }
+             var payment = await _context.Payments.FindAsync(id);
+             if (payment == null)
+             {
+                 return NotFound();
+             }
+             return View(payment);
+         }
 
-        // POST: Payments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PaymentId,Type")] Payment payment)
-        {
-            if (id != payment.PaymentId)
-            {
-                return NotFound();
-            }
+         // POST: Payments/Edit/5
+         // To protect from overposting attacks, enable the specific properties you want to bind to.
+         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+         public async Task<IActionResult> Edit(int id, [Bind("PaymentId,Type")] Payment payment)
+         {
+             if (id != payment.PaymentId)
+             {
+                 return NotFound();
+             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(payment);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PaymentExists(payment.PaymentId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(payment);
-        }
+             if (ModelState.IsValid)
+             {
+                 try
+                 {
+                     _context.Update(payment);
+                     await _context.SaveChangesAsync();
+                 }
+                 catch (DbUpdateConcurrencyException)
+                 {
+                     if (!PaymentExists(payment.PaymentId))
+                     {
+                         return NotFound();
+                     }
+                     else
+                     {
+                         throw;
+                     }
+                 }
+                 return RedirectToAction(nameof(Index));
+             }
+             return View(payment);
+         }*/
 
         // GET: Payments/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,6 +149,7 @@ namespace CarsSystem_TSP_Project.Controllers
         // POST: Payments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var payment = await _context.Payments.FindAsync(id);

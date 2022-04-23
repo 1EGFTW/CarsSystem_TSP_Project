@@ -11,7 +11,7 @@ namespace CarSystem_TSP_Project.Models
 
 
         [Required(ErrorMessage ="This field is required!")]
-        [MinLength(3,ErrorMessage="Minimum length is 3 characters!")]
+        [MinLength(2,ErrorMessage="Minimum length is 2 characters!")]
         public string Manufacturer { get; set; }
 
 
