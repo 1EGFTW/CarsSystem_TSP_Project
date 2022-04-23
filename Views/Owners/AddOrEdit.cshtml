@@ -1,37 +1,34 @@
 ﻿@model CarSystem_TSP_Project.Models.Owner
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Owners";
 }
 
-<h1>Create</h1>
 
-<h4>Owner</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  <input type="hidden" asp-for="OwnerId"/>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CarsBought" class="control-label"></label>
-                <input asp-for="CarsBought" class="form-control" />
-                <span asp-validation-for="CarsBought" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+           <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary w-100" />
+                     </div>
+                </div>
+                <div class="col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary w-100">View All</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

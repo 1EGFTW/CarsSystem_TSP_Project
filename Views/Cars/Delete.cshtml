@@ -99,7 +99,9 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="CarId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+         <div class="btn-group btn-group-sm">
+              <input type="submit" value="Delete" class="btn btn-danger" /> 
+              <a asp-action="Index" class="btn btn-secondary w-100">View All</a>
+         </div>
     </form>
 </div>

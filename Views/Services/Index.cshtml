@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<CarSystem_TSP_Project.Models.Service>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Services in the system";
 }
 
-<h1>Index</h1>
+<h1>Services</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -21,7 +19,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th></th>
+            <th>
+                 <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
+                    <i class="fa-solid fa-plus"></i>New</a>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,9 +38,17 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ServiceId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ServiceId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ServiceId">Delete</a>
+                 
+                 <div class="btn-group btn-group-sm">
+
+                <a asp-action="AddOrEdit" asp-route-id="@item.ServiceId" class="btn btn-warning">
+                    <i class="fa-solid fa-pen-to-square">Edit</i>
+                    </a> |
+             
+                <a asp-action="Delete" asp-route-id="@item.ServiceId" class="btn btn-danger">
+                    <i class="far fa-trash-alt"></i>
+                    Delete</a>
+                </div>
             </td>
         </tr>
 }
