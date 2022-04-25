@@ -22,10 +22,20 @@ namespace CarsSystem_TSP_Project.Controllers
         }
 
         // GET: Cars
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String ownerName)
         {
-            var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services);
-            return View(await applicationDbContext.ToListAsync());
+            if (String.IsNullOrEmpty(ownerName))
+            {
+                var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var searchResults = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
+                    .Where(t => t.Owner.Name.Equals(ownerName)).ToListAsync();
+                return View(searchResults);
+            }
+           
         }
 
         /*  // GET: Cars/Details/5
@@ -77,15 +87,29 @@ namespace CarsSystem_TSP_Project.Controllers
         [Authorize]
         public async Task<IActionResult> AddOrEdit([Bind("CarId,Manufacturer,Model,Engine,Transmission,DriveType,Vin,Price,DateOfFirstReg,Mileage,OwnerId,PaymentId,Discount,VehicleType,ServiceId")] Car car)
         {
-           // if (ModelState.IsValid)
-          //  {
-          if(car.CarId == 0)
+            // if (ModelState.IsValid)
+            //  {
+            Owner owner = _context.Owners.Find(car.OwnerId);
+              if(car.CarId == 0)
             {
+                if(!owner.Name.Equals("No owner"))
+                {
+                owner.CarsBought++;
+                _context.Update(owner);
+                }
+                car.Price = car.Price - (car.Price * car.Discount)/100;
                 _context.Add(car);
 
             }
             else
             {
+                if (!owner.Name.Equals("No owner"))
+                {
+                    owner.CarsBought++;
+                    _context.Update(owner);
+                }
+                car.Price = car.Price - (car.Price * car.Discount)/100;
+                _context.Add(car);
                 _context.Update(car);
             }
                 await _context.SaveChangesAsync();

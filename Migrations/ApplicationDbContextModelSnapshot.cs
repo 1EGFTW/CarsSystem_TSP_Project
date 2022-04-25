@@ -4,18 +4,16 @@ using CarsSystem_TSP_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CarsSystem_TSP_Project.Data.Migrations
+namespace CarsSystem_TSP_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220411124520_new")]
-    partial class @new
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,7 +77,8 @@ namespace CarsSystem_TSP_Project.Data.Migrations
 
                     b.Property<string>("Vin")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(17)
+                        .HasColumnType("nvarchar(17)");
 
                     b.HasKey("CarId");
 
@@ -154,7 +153,7 @@ namespace CarsSystem_TSP_Project.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"), 1L, 1);
 
-                    b.Property<int?>("MechanicId")
+                    b.Property<int>("MechanicId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -406,9 +405,13 @@ namespace CarsSystem_TSP_Project.Data.Migrations
 
             modelBuilder.Entity("CarSystem_TSP_Project.Models.Service", b =>
                 {
-                    b.HasOne("CarSystem_TSP_Project.Models.Mechanic", null)
+                    b.HasOne("CarSystem_TSP_Project.Models.Mechanic", "Mechanics")
                         .WithMany("Services")
-                        .HasForeignKey("MechanicId");
+                        .HasForeignKey("MechanicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mechanics");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -44,7 +44,8 @@ namespace CarSystem_TSP_Project.Models
         public double Price { get; set; }
 
         [DisplayName("Date of first registration")]
-        [DisplayFormat(DataFormatString ="{0:dd-MMM-yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+
         public DateTime DateOfFirstReg { get; set; }
 
 
@@ -61,7 +62,7 @@ namespace CarSystem_TSP_Project.Models
         public int PaymentId { get; set; }
         public Payment Payment { get; set; }
 
-
+        [DisplayName("Discount in %")]
         public double Discount { get; set; }
 
 
