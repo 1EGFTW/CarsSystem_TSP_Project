@@ -20,7 +20,8 @@ namespace CarSystem_TSP_Project.Models
         [Required(ErrorMessage = "This field is required!")]
         public double Price { get; set; }
         [Required(ErrorMessage = "This field is required!")]
-        private Mechanic Mechanics { get; set; }
+        public int MechanicId { get; set; }
+        public Mechanic Mechanics { get; set; }
         public virtual ICollection<Car> Cars { get; set; }
 
     }

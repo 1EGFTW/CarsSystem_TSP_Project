@@ -24,7 +24,8 @@ namespace CarsSystem_TSP_Project.Controllers
         // GET: Services
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Services.ToListAsync());
+            var applicationDbContext = _context.Services.Include(c => c.Mechanics);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         /*// GET: Services/Details/5
@@ -50,8 +51,17 @@ namespace CarsSystem_TSP_Project.Controllers
         public IActionResult AddOrEdit(int id)
         {
             if (id == 0)
+            {
+                ViewData["MechanicId"] = new SelectList(_context.Mechanics, "MechanicId", "Name");
                 return View(new Service());
-            else return View(_context.Services.Find(id));
+            }
+
+
+            else
+            {
+                ViewData["MechanicId"] = new SelectList(_context.Mechanics, "MechanicId", "Name");
+                return View(_context.Services.Find(id));
+            }
         }
 
         // POST: Services/AddOrEdit
@@ -60,7 +70,7 @@ namespace CarsSystem_TSP_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> AddOrEdit([Bind("ServiceId,Name,Type,Price")] Service service)
+        public async Task<IActionResult> AddOrEdit([Bind("ServiceId,Name,Type,Price,MechanicId")] Service service)
         {/*
             if (ModelState.IsValid)
             {*/
@@ -69,10 +79,10 @@ namespace CarsSystem_TSP_Project.Controllers
             else
                 _context.Update(service);
 
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-           /* }
-            return View(service);*/
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            /* }
+             return View(service);*/
         }
         /*
                 // GET: Services/Edit/5
