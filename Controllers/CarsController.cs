@@ -22,19 +22,51 @@ namespace CarsSystem_TSP_Project.Controllers
         }
 
         // GET: Cars
-        public async Task<IActionResult> Index(String ownerName)
+        public async Task<IActionResult> Index(String search)
         {
-            if (String.IsNullOrEmpty(ownerName))
-            {
                 var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services);
-                return View(await applicationDbContext.ToListAsync());
+
+            if (String.IsNullOrEmpty(search)) //if nothing is typed in the search bar
+            {
+                return View(await applicationDbContext.ToListAsync()); //returns all entries in DB
             }
+            
             else
             {
-                var searchResults = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
-                    .Where(t => t.Owner.Name.Equals(ownerName)).ToListAsync();
-                return View(searchResults);
+                var searchByOwnerName = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
+                    .Where(t => t.Owner.Name.Equals(search)).ToListAsync(); //checks if search param is for owner
+
+                var searcrByCarManufacturer = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
+                     .Where(t => t.Manufacturer.Equals(search)).ToListAsync(); //checks if search param is for manufacturer
+                var priceToSearch=0.0; //var for price checking
+                try
+                {
+                    priceToSearch = Double.Parse(search); //exception handling for parsing
+                }
+                catch (ArgumentNullException ane) { }
+                catch (FormatException fe) { }
+                catch (OverflowException oe) { }
+                
+                var searcrByPrice = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
+                    .Where(t => t.Price>=priceToSearch).ToListAsync(); //check if search param is for price
+                if (searchByOwnerName.Count > 0) //if there are records found by owner name
+                {
+                    return View(searchByOwnerName);
+                }
+                else if (searcrByCarManufacturer.Count>0) //if there are records found by manufacturer
+                {
+                    return View(searcrByCarManufacturer);
+                }
+                else if (searcrByPrice.Count > 0) //if there are records found by price
+                {
+                    return View(searcrByPrice);
+                }
+                else
+                    return View(await applicationDbContext.ToListAsync()); //default
+
+
             }
+            
            
         }
 
