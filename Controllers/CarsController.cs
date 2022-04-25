@@ -97,6 +97,7 @@ namespace CarsSystem_TSP_Project.Controllers
                 owner.CarsBought++;
                 _context.Update(owner);
                 }
+                car.Price = car.Price - (car.Price * car.Discount)/100;
                 _context.Add(car);
 
             }
@@ -107,6 +108,8 @@ namespace CarsSystem_TSP_Project.Controllers
                     owner.CarsBought++;
                     _context.Update(owner);
                 }
+                car.Price = car.Price - (car.Price * car.Discount)/100;
+                _context.Add(car);
                 _context.Update(car);
             }
                 await _context.SaveChangesAsync();
