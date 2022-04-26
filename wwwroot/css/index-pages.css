@@ -1,0 +1,17 @@
+﻿body {
+    background-color: #D3D7D9;
+}
+
+
+
+.wrapper {
+    background-color: #9DA6AA;
+}
+
+.wrapper h1{
+    text-align: center;
+}
+
+.btn-align{
+    text-align: right;
+}
