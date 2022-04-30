@@ -1,17 +1,73 @@
 ﻿body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
     background-color: #D3D7D9;
 }
 
-
-
 .wrapper {
     background-color: #9DA6AA;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .wrapper h1{
     text-align: center;
 }
 
-.btn-align{
-    text-align: right;
+.btn-align-end {
+    width: 120px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #9DA6AA;
+}
+
+tr:nth-child(odd) {
+    background-color: #E4E6E7;
+}
+
+.expand_button {
+    position: absolute;
+}
+
+.e-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    max-width: 30px;
+    -webkit-transition: max-width 0.3s ease-in-out;
+    -moz-transition: max-width 0.3s ease-in-out;
+    -o-transition: max-width 0.3s ease-in-out;
+    transition: max-width 0.3s linear
+}
+
+.e-button-text {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.e-button:hover {
+    max-width: 280px
+}
+
+.btn-wrapper {
+    text-align: left;
+}
+
+#car-wrapper {
+    width: 160%;
+    margin-left: -220px;
 }

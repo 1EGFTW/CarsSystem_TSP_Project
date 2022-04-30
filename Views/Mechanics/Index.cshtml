@@ -18,9 +18,11 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
-                    <th class="btn-align">
-                        <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
-                            <i class="fa-solid fa-plus"></i>New</a>
+                    <th class="btn-align-end">
+                        <div class="btn-wrapper">
+                            <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
+                                <i class="fa-solid fa-plus"></i>New</a>
+                        </div>
                     </th>
                 </tr>
             </thead>
@@ -30,16 +32,15 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
-                    <td>
-                         <div class="btn-group btn-group-sm">
+                    <td  class="btn-align-end">
+                         <div class="btn-group btn-group-sm expand_button">
+                           
+                            <a asp-action="AddOrEdit" asp-route-id="@item.MechanicId" class="btn e-button btn-sm btn-warning"><span class="e-button-text">
+                            <i class="fa-solid fa-pen-to-square" style="padding-right:5px;"></i>Edit</span></a>
 
-                        <a asp-action="AddOrEdit" asp-route-id="@item.MechanicId" class="btn btn-warning">
-                            <i class="fa-solid fa-pen-to-square">Edit</i>
-                            </a> |
-             
-                        <a asp-action="Delete" asp-route-id="@item.MechanicId" class="btn btn-danger">
-                            <i class="far fa-trash-alt"></i>
-                            Delete</a>
+                           
+                            <a asp-action="Delete" asp-route-id="@item.MechanicId" class="btn e-button btn-sm btn-danger"><span class="e-button-text">
+                            <i class="far fa-trash-alt" style="padding-right:7px;"></i>Delete</span></a>
                         </div>
                     </td>
                 </tr>
