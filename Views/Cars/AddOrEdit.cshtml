@@ -1,93 +1,81 @@
 ﻿@model CarSystem_TSP_Project.Models.Car
-
+<link rel="stylesheet" href="~/css/index-pages.css" asp-append-version="true" />
 @{
     ViewData["Title"] = "Car";
 }
 
 
 <div class="row">
-    <div class="col-md-6 offset-md-3">
-        <h2>Car</h2>
+    <div class="col-md-6 offset-md-3 cont">
   
         <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CarId"/>
-            <div class="form-group">
-                <label asp-for="Manufacturer" class="control-label"></label>
-                <input asp-for="Manufacturer" class="form-control" />
+            <div class="group">
+                <input asp-for="Manufacturer" type="text" placeholder="Manufacturer" />
                 <span asp-validation-for="Manufacturer" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control" />
+            <div class="group">
+                <input asp-for="Model" type="text" placeholder="Model" />
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Engine" class="control-label"></label>
-                <input asp-for="Engine" class="form-control" />
+            <div class="group">
+                <input asp-for="Engine" type="text" placeholder="Engine" />
                 <span asp-validation-for="Engine" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Transmission" class="control-label"></label>
-                <input asp-for="Transmission" class="form-control" />
+            <div class="group">
+                <input asp-for="Transmission" type="text" placeholder="Transmission" />
                 <span asp-validation-for="Transmission" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DriveType" class="control-label"></label>
-                <input asp-for="DriveType" class="form-control" />
+            <div class="group">
+                <input asp-for="DriveType" type="text" placeholder="Drive type" />
                 <span asp-validation-for="DriveType" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Vin" class="control-label"></label>
-                <input asp-for="Vin" class="form-control" />
+            <div class="group">
+                <input asp-for="Vin" type="text" placeholder="Vin" />
                 <span asp-validation-for="Vin" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+            <div class="group">
+                <input asp-for="Price" type="text" placeholder="Price" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DateOfFirstReg" class="control-label"></label>
-                <input asp-for="DateOfFirstReg" class="form-control" />
+            <div class="group">
+                <input asp-for="DateOfFirstReg" type="text" placeholder="Date of first registration" />
                 <span asp-validation-for="DateOfFirstReg" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Mileage" class="control-label"></label>
-                <input asp-for="Mileage" class="form-control" />
+            <div class="group">
+                <input asp-for="Mileage" type="text" placeholder="Mileage" />
                 <span asp-validation-for="Mileage" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="OwnerId" class="control-label"></label>
-                <select asp-for="OwnerId" class ="form-control" asp-items="ViewBag.OwnerId"></select>
+            <div class="group">
+                <label asp-for="OwnerId">Select owner</label>
+                <select asp-for="OwnerId" asp-items="ViewBag.OwnerId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="PaymentId" class="control-label"></label>
-                <select asp-for="PaymentId" class ="form-control" asp-items="ViewBag.PaymentId"></select>
+            <div class="group">
+                <label asp-for="PaymentId">Select a payment method</label>
+                <select asp-for="PaymentId" asp-items="ViewBag.PaymentId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="Discount" class="control-label"></label>
-                <input asp-for="Discount" class="form-control" />
+            <div class="group">
+                <input asp-for="Discount" type="text" placeholder="Discount" />
                 <span asp-validation-for="Discount" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="VehicleType" class="control-label"></label>
-                <input asp-for="VehicleType" class="form-control" />
+            <div class="group">
+                <input asp-for="VehicleType" type="text" placeholder="Vehicle type" />
                 <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ServiceId" class="control-label"></label>
-                <select asp-for="ServiceId" class ="form-control" asp-items="ViewBag.ServiceId"></select>
+            <div class="group">
+                <label asp-for="ServiceId">Select a service</label>
+                <select asp-for="ServiceId" asp-items="ViewBag.ServiceId"></select>
             </div>
            
-            <div class="row mt-2">
+            <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary w-100" />
+                    <input type="submit" value="Submit" class="btn button-submit w-100" />
                      </div>
                 </div>
                 <div class="col-md-6">
-                    <a asp-action="Index" class="btn btn-secondary w-100">View All</a>
+                    <a asp-action="Index" class="btn button-view w-100">View All</a>
                 </div>
             </div>
         </form>
