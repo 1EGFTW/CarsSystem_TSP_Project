@@ -22,7 +22,7 @@ namespace CarsSystem_TSP_Project.Controllers
         }
 
         // GET: Cars
-        public async Task<IActionResult> Index(String search)
+        public async Task<IActionResult> Index(String search) // search by type(used/new?
         {
                 var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services);
 
@@ -117,6 +117,8 @@ namespace CarsSystem_TSP_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
+
+        //da se poglednat ifo-vete, ne izglejda pravilno, pri smqna na owner - decrement na cars bought
         public async Task<IActionResult> AddOrEdit([Bind("CarId,Manufacturer,Model,Engine,Transmission,DriveType,Vin,Price,DateOfFirstReg,Mileage,OwnerId,PaymentId,Discount,VehicleType,ServiceId")] Car car)
         {
             // if (ModelState.IsValid)
@@ -241,7 +243,14 @@ namespace CarsSystem_TSP_Project.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var car = await _context.Cars.FindAsync(id);
+            Owner owner = _context.Owners.Find(car.OwnerId);
             _context.Cars.Remove(car);
+
+            if (!owner.Name.Equals("No owner"))
+            {
+                owner.CarsBought--;
+                _context.Update(owner);
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
