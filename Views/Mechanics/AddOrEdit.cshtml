@@ -1,28 +1,28 @@
 ﻿@model CarSystem_TSP_Project.Models.Mechanic
-
+<link rel="stylesheet" href="~/css/index-pages.css" asp-append-version="true" />
 @{
     ViewData["Title"] = "Mechanic";
 }
 
 
 <div class="row">
-    <div class="col-md-4 offset-md-2">
+    <div class="col-md-6 col-centered cont">
         <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MechanicId"/>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input type="hidden" asp-for="MechanicId"/>
+            <div class="group">
+                <input asp-for="Name" type="text" placeholder="Name" />
+                <span class="bar"></span>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-             <div class="row mt-2">
+             <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary w-100" />
+                    <input type="submit" value="Submit" class="btn button-submit w-100" />
                      </div>
                 </div>
                 <div class="col-md-6">
-                    <a asp-action="Index" class="btn btn-secondary w-100">View All</a>
+                    <a asp-action="Index" class="btn button-view w-100">View All</a>
                 </div>
             </div>
         </form>
