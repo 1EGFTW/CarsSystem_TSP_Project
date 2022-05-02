@@ -16,3 +16,35 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.navbar-custom {
+    background-color: #343C45;
+    font: 120% system-ui;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-item a {
+    color: #F5F5F5;
+}
+
+.nav-item a {
+    width: 110px;
+    text-align: center;
+}
+
+.nav-item a:hover {
+    background-color: #D3D7D9;
+    font-weight: bold;
+    color: #343C45;
+}
+
+#logout-btn {
+    color: #F5F5F5;
+    font-size: 18px;
+}
+
+#login-name {
+    padding-top: 12px;
+    font-size: 18px;
+    color: #F5F5F5;
+}

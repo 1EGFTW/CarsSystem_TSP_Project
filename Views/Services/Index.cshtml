@@ -1,62 +1,72 @@
 ﻿@model IEnumerable<CarSystem_TSP_Project.Models.Service>
+<!DOCTYPE html>
+<head>
+    <script src="https://kit.fontawesome.com/4b4c808239.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/index-pages.css" asp-append-version="true" />
+</head>
 
+<body>
 @{
     ViewData["Title"] = "Services in the system";
 }
 
-<h1>Services</h1>
+<div class="wrapper">
+
+        <h1>Services</h1>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-             <th>
-                @Html.DisplayNameFor(model => model.Mechanics)
-            </th>
-            <th>
-                 <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
-                    <i class="fa-solid fa-plus"></i>New</a>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-              <td>
-                @Html.DisplayFor(modelItem => item.Mechanics.Name)
-            </td>
-            <td>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                     <th>
+                        @Html.DisplayNameFor(model => model.Mechanics)
+                    </th>
+                    <th class="btn-align-end">
+                        <div class="btn-wrapper">
+                           <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
+                           <i class="fa-solid fa-plus"></i>New</a>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                      <td>
+                        @Html.DisplayFor(modelItem => item.Mechanics.Name)
+                    </td>
+                    <td class="btn-align-end">
                  
-                 <div class="btn-group btn-group-sm">
+                         <div class="btn-group btn-group-sm expand_button">
 
-                <a asp-action="AddOrEdit" asp-route-id="@item.ServiceId" class="btn btn-warning">
-                    <i class="fa-solid fa-pen-to-square">Edit</i>
-                    </a> |
+                            <a asp-action="AddOrEdit" asp-route-id="@item.ServiceId" class="btn e-button btn-sm btn-warning"><span class="e-button-text">
+                                <i class="fa-solid fa-pen-to-square" style="padding-right:5px;"></i>Edit</span></a>
              
-                <a asp-action="Delete" asp-route-id="@item.ServiceId" class="btn btn-danger">
-                    <i class="far fa-trash-alt"></i>
-                    Delete</a>
-                </div>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                            <a asp-action="Delete" asp-route-id="@item.ServiceId" class="btn e-button btn-sm btn-danger"><span class="e-button-text">
+                                <i class="far fa-trash-alt" style="padding-right:7px;"></i>Delete</span></a>
+                        </div>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+</div>
+</body>
