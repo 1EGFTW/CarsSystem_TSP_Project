@@ -11,10 +11,22 @@
     box-sizing: border-box;
 }
 
-.wrapper h1{
+    .wrapper h1 {
+        text-align: center;
+    }
+
+.centered{
     text-align: center;
 }
 
+    .centered h3 {
+        font-weight: 500;
+    }
+
+    .centered h4 {
+        font-weight: 400;
+        color: #697178;
+    }
 .btn-align-end {
     width: 120px;
 }
@@ -42,7 +54,7 @@ tr:nth-child(odd) {
 }
 
 .e-button {
-    padding-left: 10px;
+    padding-left: 7px;
     padding-right: 10px;
     position: relative;
     float: left;
@@ -83,9 +95,11 @@ tr:nth-child(odd) {
     background: #F5F5F5;
     padding: 50px 50px 30px;
     margin-bottom: 100px;
+    min-width: 500px;
 }
 
 .group {
+    display: block;
     position: relative;
     margin-bottom: 45px;
 }
@@ -143,6 +157,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after, select:focus ~ .bar:before,
     font-weight: 600;
 }
 
+.button-delete {
+    background-color: #9d0208;
+    color: #F5F5F5;
+    font-weight: 600;
+}
+
 .button-view {
     background-color: #4C5457;
     color: #F5F5F5;
@@ -150,7 +170,22 @@ input:focus ~ .bar:before, input:focus ~ .bar:after, select:focus ~ .bar:before,
 }
 
 label {
-    font-size: 16px;
     color: #0A090C;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+input:focus ~ label, input:not(:placeholder-shown) ~ label {
+    top: -20px;
+}
+
+.select-label{
+    top: -20px;
 }

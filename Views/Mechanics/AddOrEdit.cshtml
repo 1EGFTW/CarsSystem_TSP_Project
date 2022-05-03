@@ -11,8 +11,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="MechanicId"/>
             <div class="group">
-                <input asp-for="Name" type="text" placeholder="Name" />
+                <input asp-for="Name" type="text" placeholder=" " />
                 <span class="bar"></span>
+                <label asp-for="Name">Name</label>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
              <div class="row mt-3">

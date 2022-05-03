@@ -11,22 +11,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ServiceId"/>
             <div class="group">
-                <input asp-for="Name" type="text" placeholder="Name"/>
+                <input asp-for="Name" type="text" placeholder=" "/>
                 <span class="bar"></span>
+                <label asp-for="Name">Name</label>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Type" type="text" placeholder="Type" />
+                <input asp-for="Type" type="text" placeholder=" " />
                 <span class="bar"></span>
+                <label asp-for="Type">Type</label>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Price" type="text" placeholder="Price" />
+                <input asp-for="Price" type="text" placeholder=" " />
                 <span class="bar"></span>
+                <label asp-for="Price">Price</label>
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
              <div class="group">
-                <label asp-for="MechanicId">Select a mechanic</label>
+                <label asp-for="MechanicId" class="select-label">Select a mechanic</label>
                 <select asp-for="MechanicId" asp-items="ViewBag.MechanicId"></select>
                 <span class="bar"></span>
             </div>

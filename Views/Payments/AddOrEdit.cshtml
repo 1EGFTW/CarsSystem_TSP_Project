@@ -10,7 +10,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                <input type="hidden" asp-for="PaymentId"/>
             <div class="group">
-                <input asp-for="Type" type="text" placeholder="Type" />
+                <input asp-for="Type" type="text" placeholder=" "/>
+                <span class="bar"></span>
+                <label asp-for="Type">Type</label>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
               <div class="row mt-3">
