@@ -12,60 +12,85 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CarId"/>
             <div class="group">
-                <input asp-for="Manufacturer" type="text" placeholder="Manufacturer" />
+                <input asp-for="Manufacturer" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Manufacturer">Manufacturer</label>
                 <span asp-validation-for="Manufacturer" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Model" type="text" placeholder="Model" />
+                <input asp-for="Model" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Model">Model</label>
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Engine" type="text" placeholder="Engine" />
+                <input asp-for="Engine" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Engine">Engine</label>
                 <span asp-validation-for="Engine" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Transmission" type="text" placeholder="Transmission" />
+                <input asp-for="Transmission" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Transmission">Transmission</label>
                 <span asp-validation-for="Transmission" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="DriveType" type="text" placeholder="Drive type" />
+                <input asp-for="DriveType" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="DriveType">Drive type</label>
                 <span asp-validation-for="DriveType" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Vin" type="text" placeholder="Vin" />
+                <input asp-for="Vin" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Vin">Vin</label>
                 <span asp-validation-for="Vin" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Price" type="text" placeholder="Price" />
+                <input asp-for="Price" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Price">Price</label>
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="DateOfFirstReg" type="text" placeholder="Date of first registration" />
+                <input asp-for="DateOfFirstReg"/>
+                <span class="bar"></span>
+                <label asp-for="DateOfFirstReg" class="select-label">Date of first registration</label>
                 <span asp-validation-for="DateOfFirstReg" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="Mileage" type="text" placeholder="Mileage" />
+                <input asp-for="Mileage" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Mileage">Mileage</label>
                 <span asp-validation-for="Mileage" class="text-danger"></span>
             </div>
             <div class="group">
-                <label asp-for="OwnerId">Select owner</label>
+                <label asp-for="OwnerId" class="select-label">Select owner</label>
                 <select asp-for="OwnerId" asp-items="ViewBag.OwnerId"></select>
+                <span class="bar"></span>
             </div>
             <div class="group">
-                <label asp-for="PaymentId">Select a payment method</label>
+                <label asp-for="PaymentId" class="select-label">Select a payment method</label>
                 <select asp-for="PaymentId" asp-items="ViewBag.PaymentId"></select>
+                <span class="bar"></span>
             </div>
             <div class="group">
-                <input asp-for="Discount" type="text" placeholder="Discount" />
+                <input asp-for="Discount" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="Discount">Discount</label>
                 <span asp-validation-for="Discount" class="text-danger"></span>
             </div>
             <div class="group">
-                <input asp-for="VehicleType" type="text" placeholder="Vehicle type" />
+                <input asp-for="VehicleType" type="text" placeholder=" " />
+                <span class="bar"></span>
+                <label asp-for="VehicleType">Vehiacle type</label>
                 <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
             <div class="group">
-                <label asp-for="ServiceId">Select a service</label>
-                <select asp-for="ServiceId" asp-items="ViewBag.ServiceId"></select>
+                <label asp-for="ServiceId" class="select-label">Select a service</label>
+                <select asp-for="ServiceId" asp-items="ViewBag.ServiceId" ></select>
+                <span class="bar"></span>
             </div>
            
             <div class="row mt-3">

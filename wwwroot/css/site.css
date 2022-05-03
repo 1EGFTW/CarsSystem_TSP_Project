@@ -14,7 +14,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #D3D7D9;
 }
 
 .navbar-custom {
@@ -47,4 +48,28 @@ body {
     padding-top: 12px;
     font-size: 18px;
     color: #F5F5F5;
+}
+
+.cont{
+    display: block;
+    background: #F5F5F5;
+    padding: 50px 50px 30px;
+    margin-bottom: 100px;
+    min-width: 500px;
+}
+
+.col-centered {
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+.input-style {
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 600;
 }
