@@ -12,6 +12,16 @@
     <div class="wrapper">
 
        <h1>Owners in the system</h1>
+        <form asp-action="Index">
+            <div class="input-group md-form form-sm form-2 p1-0">
+                <input name="search" class="form-control my-0 py-1 red-border" type="text" placeholder="Search by cars bought" aria-label="Search" />
+                <div class="input-group-append">
+                    <span class="input-group-text red lightne-3" id="searchRes">
+                        <i class="fas fa-search text-grey" style="padding-bottom:5px;" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </form>
 
             <table class="table">
                 <thead>
@@ -55,5 +65,14 @@
             }
                 </tbody>
             </table>
+              @section scripts{
+            <script>
+               $ (function(){
+                   $("#searchRes").click(function () {
+                       $("Form").submit();
+                   })
+               });
+            </script>
+        }
      </div>
 </body>

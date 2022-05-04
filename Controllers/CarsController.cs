@@ -21,53 +21,57 @@ namespace CarsSystem_TSP_Project.Controllers
             _context = context;
         }
 
+        public IEnumerable<Car> GetSearchResults(String search)
+        {
+            var searchByOwnerName =  _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
+                  .Where(t => t.Owner.Name.Equals(search)).ToList(); //checks if search param is for owner
+            if (searchByOwnerName.Count > 0)
+            {
+                return searchByOwnerName;
+            }
+            var searcrByCarManufacturer = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
+                    .Where(t => t.Manufacturer.Equals(search)).ToList();//checks if search param is for manufacturer
+            if (searcrByCarManufacturer.Count > 0)
+            {
+                return searcrByCarManufacturer;
+            }
+            var priceToSearch = 0.0; //var for price checking
+            try
+            {
+                priceToSearch = Double.Parse(search); //exception handling for parsing
+            }
+            catch (ArgumentNullException ane) { }
+            catch (FormatException fe) { }
+            catch (OverflowException oe) { }
+
+            var searcrByPrice =  _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
+                .Where(t => t.Price >= priceToSearch).ToList();//check if search param is for price
+            if (searcrByPrice.Count > 0)
+            {
+                return searcrByPrice;
+            }
+            return null;
+
+        }
+
         // GET: Cars
         public async Task<IActionResult> Index(String search) // search by type(used/new?
         {
-                var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services);
+            var applicationDbContext = _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services);
 
             if (String.IsNullOrEmpty(search)) //if nothing is typed in the search bar
             {
                 return View(await applicationDbContext.ToListAsync()); //returns all entries in DB
             }
             
-            else
+            else if(GetSearchResults(search)!=null)
             {
-                var searchByOwnerName = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
-                    .Where(t => t.Owner.Name.Equals(search)).ToListAsync(); //checks if search param is for owner
-
-                var searcrByCarManufacturer = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
-                     .Where(t => t.Manufacturer.Equals(search)).ToListAsync(); //checks if search param is for manufacturer
-                var priceToSearch=0.0; //var for price checking
-                try
-                {
-                    priceToSearch = Double.Parse(search); //exception handling for parsing
-                }
-                catch (ArgumentNullException ane) { }
-                catch (FormatException fe) { }
-                catch (OverflowException oe) { }
-                
-                var searcrByPrice = await _context.Cars.Include(c => c.Owner).Include(c => c.Payment).Include(c => c.Services)
-                    .Where(t => t.Price>=priceToSearch).ToListAsync(); //check if search param is for price
-                if (searchByOwnerName.Count > 0) //if there are records found by owner name
-                {
-                    return View(searchByOwnerName);
-                }
-                else if (searcrByCarManufacturer.Count>0) //if there are records found by manufacturer
-                {
-                    return View(searcrByCarManufacturer);
-                }
-                else if (searcrByPrice.Count > 0) //if there are records found by price
-                {
-                    return View(searcrByPrice);
-                }
-                else
-                    return View(await applicationDbContext.ToListAsync()); //default
-
+                return View(GetSearchResults(search));
 
             }
-            
-           
+            else return View(await applicationDbContext.ToListAsync());
+
+
         }
 
         /*  // GET: Cars/Details/5
@@ -124,26 +128,25 @@ namespace CarsSystem_TSP_Project.Controllers
             // if (ModelState.IsValid)
             //  {
             Owner owner = _context.Owners.Find(car.OwnerId);
-              if(car.CarId == 0)
-            {
-                if(!owner.Name.Equals("No owner"))
+              if(car.CarId == 0) //if the car is new
+              {
+                if(!owner.Name.Equals("No owner")) // if the new car has a owner
                 {
                 owner.CarsBought++;
                 _context.Update(owner);
                 }
-                car.Price = car.Price - (car.Price * car.Discount)/100;
+                car.Price -= (car.Price * car.Discount)/100;
                 _context.Add(car);
 
             }
-            else
+            else // if the car isn't new (edit)
             {
-                if (!owner.Name.Equals("No owner"))
+                if (!owner.Name.Equals("No owner")) //if the car has a owner
                 {
-                    owner.CarsBought++;
+                    owner.CarsBought++; //check to see if this is regarding the new owner or the old one
                     _context.Update(owner);
                 }
-                car.Price = car.Price - (car.Price * car.Discount)/100;
-                _context.Add(car);
+                car.Price -= (car.Price * car.Discount)/100;
                 _context.Update(car);
             }
                 await _context.SaveChangesAsync();
