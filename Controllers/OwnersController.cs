@@ -20,10 +20,33 @@ namespace CarsSystem_TSP_Project.Controllers
         {
             _context = context;
         }
-
-        // GET: Owners
-        public async Task<IActionResult> Index()
+        public IEnumerable<Owner> GetSearchResults(String search)
         {
+            var searchCriteria = 0;
+            try
+            {
+                searchCriteria = int.Parse(search);
+            }
+            catch (Exception ex) { }
+
+            var searchByCarsBought = _context.Owners.Where(t => t.CarsBought >= searchCriteria).ToList();
+            if (searchByCarsBought.Count > 0)
+                return searchByCarsBought;
+
+            return null;
+            
+        }
+        // GET: Owners
+        public async Task<IActionResult> Index(String search) //search za cars bought
+        {
+            if (String.IsNullOrEmpty(search)) //if nothing is typed in the search bar
+            {
+                return View(await _context.Owners.ToListAsync()); //returns all entries in DB
+            }
+            else if (GetSearchResults(search) != null)
+            {
+                return View(GetSearchResults(search));
+            }
             return View(await _context.Owners.ToListAsync());
         }
 

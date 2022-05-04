@@ -20,11 +20,40 @@ namespace CarsSystem_TSP_Project.Controllers
         {
             _context = context;
         }
+        public IEnumerable<Service> GetSearchResults(String search)
+        {
+            var searchByServiceType = _context.Services.Include(c => c.Mechanics).Where(t => t.Type.Equals(search)).ToList();
+            if (searchByServiceType.Count > 0)
+                return searchByServiceType;
+            var searchCriteria = 0.0;
+            try
+            {
+                searchCriteria = double.Parse(search);
+            }
+            catch (Exception ex) { }
 
+            var searchByServicePrice = _context.Services.Include(c => c.Mechanics).Where(t => t.Price>=searchCriteria).ToList();
+            if (searchByServicePrice.Count > 0)
+                return searchByServicePrice;
+
+            var searchServiceByMechanicName = _context.Services.Include(c => c.Mechanics).Where(t => t.Mechanics.Name.Equals(search)).ToList();
+            if (searchServiceByMechanicName.Count > 0)
+                return searchServiceByMechanicName;
+
+            return null;
+        }
         // GET: Services
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String search) //search by type/price
         {
             var applicationDbContext = _context.Services.Include(c => c.Mechanics);
+            if (String.IsNullOrEmpty(search)) //if nothing is typed in the search bar
+            {
+                return View(await applicationDbContext.ToListAsync()); //returns all entries in DB
+            }
+            if (GetSearchResults(search) != null)
+            {
+                return View(GetSearchResults(search));
+            }
             return View(await applicationDbContext.ToListAsync());
         }
 
