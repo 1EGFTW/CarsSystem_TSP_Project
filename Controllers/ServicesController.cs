@@ -25,6 +25,11 @@ namespace CarsSystem_TSP_Project.Controllers
             var searchByServiceType = _context.Services.Include(c => c.Mechanics).Where(t => t.Type.Equals(search)).ToList();
             if (searchByServiceType.Count > 0)
                 return searchByServiceType;
+
+            var searchServiceByMechanicName = _context.Services.Include(c => c.Mechanics).Where(t => t.Mechanics.Name.Equals(search)).ToList();
+            if (searchServiceByMechanicName.Count > 0)
+                return searchServiceByMechanicName;
+
             var searchCriteria = 0.0;
             try
             {
@@ -36,9 +41,6 @@ namespace CarsSystem_TSP_Project.Controllers
             if (searchByServicePrice.Count > 0)
                 return searchByServicePrice;
 
-            var searchServiceByMechanicName = _context.Services.Include(c => c.Mechanics).Where(t => t.Mechanics.Name.Equals(search)).ToList();
-            if (searchServiceByMechanicName.Count > 0)
-                return searchServiceByMechanicName;
 
             return null;
         }
