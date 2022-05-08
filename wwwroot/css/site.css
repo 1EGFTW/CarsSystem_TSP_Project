@@ -18,6 +18,13 @@ body {
     background-color: #D3D7D9;
 }
 
+.home-page {
+    background-image: url(images/classic-cars.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    color: #F5F5F5;
+}
+
 .navbar-custom {
     background-color: #343C45;
     font: 120% system-ui;
