@@ -45,7 +45,7 @@ namespace CarsSystem_TSP_Project.Controllers
             return null;
         }
         // GET: Services
-        public async Task<IActionResult> Index(String search) //search by type/price
+        public async Task<IActionResult> Index(String search)
         {
             var applicationDbContext = _context.Services.Include(c => c.Mechanics);
             if (String.IsNullOrEmpty(search)) //if nothing is typed in the search bar
@@ -59,24 +59,6 @@ namespace CarsSystem_TSP_Project.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        /*// GET: Services/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var service = await _context.Services
-                .FirstOrDefaultAsync(m => m.ServiceId == id);
-            if (service == null)
-            {
-                return NotFound();
-            }
-
-            return View(service);
-        }
-*/
         // GET: Services/AddOrEdit
         [Authorize]
         public IActionResult AddOrEdit(int id)
@@ -102,9 +84,7 @@ namespace CarsSystem_TSP_Project.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> AddOrEdit([Bind("ServiceId,Name,Type,Price,MechanicId")] Service service)
-        {/*
-            if (ModelState.IsValid)
-            {*/
+        {
             if (service.ServiceId == 0)
                 _context.Add(service);
             else
@@ -112,61 +92,9 @@ namespace CarsSystem_TSP_Project.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            /* }
-             return View(service);*/
+            
         }
-        /*
-                // GET: Services/Edit/5
-                public async Task<IActionResult> Edit(int? id)
-                {
-                    if (id == null)
-                    {
-                        return NotFound();
-                    }
-
-                    var service = await _context.Services.FindAsync(id);
-                    if (service == null)
-                    {
-                        return NotFound();
-                    }
-                    return View(service);
-                }
-
-                // POST: Services/Edit/5
-                // To protect from overposting attacks, enable the specific properties you want to bind to.
-                // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-                [HttpPost]
-                [ValidateAntiForgeryToken]
-                public async Task<IActionResult> Edit(int id, [Bind("ServiceId,Name,Type,Price")] Service service)
-                {
-                    if (id != service.ServiceId)
-                    {
-                        return NotFound();
-                    }
-
-                    if (ModelState.IsValid)
-                    {
-                        try
-                        {
-                            _context.Update(service);
-                            await _context.SaveChangesAsync();
-                        }
-                        catch (DbUpdateConcurrencyException)
-                        {
-                            if (!ServiceExists(service.ServiceId))
-                            {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
-                            }
-                        }
-                        return RedirectToAction(nameof(Index));
-                    }
-                    return View(service);
-                }
-        */
+ 
         // GET: Services/Delete/5
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
