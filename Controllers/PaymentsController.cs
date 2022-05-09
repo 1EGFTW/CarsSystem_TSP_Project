@@ -27,24 +27,6 @@ namespace CarsSystem_TSP_Project.Controllers
             return View(await _context.Payments.ToListAsync());
         }
 
-        // GET: Payments/Details/5
-        /*public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var payment = await _context.Payments
-                .FirstOrDefaultAsync(m => m.PaymentId == id);
-            if (payment == null)
-            {
-                return NotFound();
-            }
-
-            return View(payment);
-        }*/
-
         // GET: Payments/AddOrEdit
         [Authorize]
         public IActionResult AddOrEdit(int id)
@@ -63,8 +45,7 @@ namespace CarsSystem_TSP_Project.Controllers
         [Authorize]
         public async Task<IActionResult> AddOrEdit([Bind("PaymentId,Type")] Payment payment)
         {
-            /*if (ModelState.IsValid)
-            {*/
+           
             if (payment.PaymentId == 0)
                 _context.Add(payment);
             else
@@ -72,60 +53,8 @@ namespace CarsSystem_TSP_Project.Controllers
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-       /*     }
-            return View(payment);*/
+       
         }
-
-        /* // GET: Payments/Edit/5
-         public async Task<IActionResult> Edit(int? id)
-         {
-             if (id == null)
-             {
-                 return NotFound();
-             }
-
-             var payment = await _context.Payments.FindAsync(id);
-             if (payment == null)
-             {
-                 return NotFound();
-             }
-             return View(payment);
-         }
-
-         // POST: Payments/Edit/5
-         // To protect from overposting attacks, enable the specific properties you want to bind to.
-         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-         public async Task<IActionResult> Edit(int id, [Bind("PaymentId,Type")] Payment payment)
-         {
-             if (id != payment.PaymentId)
-             {
-                 return NotFound();
-             }
-
-             if (ModelState.IsValid)
-             {
-                 try
-                 {
-                     _context.Update(payment);
-                     await _context.SaveChangesAsync();
-                 }
-                 catch (DbUpdateConcurrencyException)
-                 {
-                     if (!PaymentExists(payment.PaymentId))
-                     {
-                         return NotFound();
-                     }
-                     else
-                     {
-                         throw;
-                     }
-                 }
-                 return RedirectToAction(nameof(Index));
-             }
-             return View(payment);
-         }*/
 
         // GET: Payments/Delete/5
         [Authorize]

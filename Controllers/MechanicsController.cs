@@ -27,23 +27,7 @@ namespace CarsSystem_TSP_Project.Controllers
             return View(await _context.Mechanics.ToListAsync());
         }
 
-        /* // GET: Mechanics/Details/5
-         public async Task<IActionResult> Details(int? id)
-         {
-             if (id == null)
-             {
-                 return NotFound();
-             }
-
-             var mechanic = await _context.Mechanics
-                 .FirstOrDefaultAsync(m => m.MechanicId == id);
-             if (mechanic == null)
-             {
-                 return NotFound();
-             }
-
-             return View(mechanic);
-         }*/
+       
 
         // GET: Mechanics/AddOrEdit
         [Authorize]
@@ -63,9 +47,7 @@ namespace CarsSystem_TSP_Project.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> AddOrEdit([Bind("MechanicId,Name")] Mechanic mechanic)
-        {/*
-            if (ModelState.IsValid)
-            {*/
+        {
                 if(mechanic.MechanicId== 0)
                 {
                 _context.Add(mechanic);
@@ -76,62 +58,9 @@ namespace CarsSystem_TSP_Project.Controllers
                 }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-/*            }
-            return View(mechanic);*/
+         
         }
 
-       /* // GET: Mechanics/Edit
-      
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var mechanic = await _context.Mechanics.FindAsync(id);
-            if (mechanic == null)
-            {
-                return NotFound();
-            }
-            return View(mechanic);
-        }
-
-        // POST: Mechanics/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MechanicId,Name")] Mechanic mechanic)
-        {
-            if (id != mechanic.MechanicId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(mechanic);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MechanicExists(mechanic.MechanicId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(mechanic);
-        }
-*/
         // GET: Mechanics/Delete/5
         [Authorize]
         public async Task<IActionResult> Delete(int? id)

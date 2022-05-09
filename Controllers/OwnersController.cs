@@ -50,24 +50,6 @@ namespace CarsSystem_TSP_Project.Controllers
             return View(await _context.Owners.ToListAsync());
         }
 
-        /*// GET: Owners/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var owner = await _context.Owners
-                .FirstOrDefaultAsync(m => m.OwnerId == id);
-            if (owner == null)
-            {
-                return NotFound();
-            }
-
-            return View(owner);
-        }*/
-
         // GET: Owners/AddOrEdit
         [Authorize]
         public IActionResult AddOrEdit(int id)
@@ -85,8 +67,6 @@ namespace CarsSystem_TSP_Project.Controllers
         [Authorize]
         public async Task<IActionResult> AddOrEdit([Bind("OwnerId,Name,CarsBought")] Owner owner)
         {
-            /*  if (ModelState.IsValid)
-              {*/
             if (owner.OwnerId == 0)
                 _context.Add(owner);
             else
@@ -94,60 +74,8 @@ namespace CarsSystem_TSP_Project.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-           /* }
-            return View(owner);*/
+          
         }
-
-        /* // GET: Owners/Edit/5
-         public async Task<IActionResult> Edit(int? id)
-         {
-             if (id == null)
-             {
-                 return NotFound();
-             }
-
-             var owner = await _context.Owners.FindAsync(id);
-             if (owner == null)
-             {
-                 return NotFound();
-             }
-             return View(owner);
-         }*/
-
-        // POST: Owners/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /* [HttpPost]
-         [ValidateAntiForgeryToken]
-         public async Task<IActionResult> Edit(int id, [Bind("OwnerId,Name,CarsBought")] Owner owner)
-         {
-             if (id != owner.OwnerId)
-             {
-                 return NotFound();
-             }
-
-             if (ModelState.IsValid)
-             {
-                 try
-                 {
-                     _context.Update(owner);
-                     await _context.SaveChangesAsync();
-                 }
-                 catch (DbUpdateConcurrencyException)
-                 {
-                     if (!OwnerExists(owner.OwnerId))
-                     {
-                         return NotFound();
-                     }
-                     else
-                     {
-                         throw;
-                     }
-                 }
-                 return RedirectToAction(nameof(Index));
-             }
-             return View(owner);
-         }*/
 
         // GET: Owners/Delete/5
         [Authorize]
